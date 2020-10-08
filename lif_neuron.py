@@ -12,8 +12,8 @@ class lif_neuron:
         self.debug = debug
 
         # Properties
-        self.capacitance = capacitance # Capacitance in miliVolts
-        self.resistance = resistance # Resistance in kiloOhms
+        self.capacitance = capacitance # Capacitance in milivolts
+        self.resistance = resistance # Resistance in kiloohms
         self.time_step = time_step # Time between integrations in miliseconds
 
         # Activity tracking
