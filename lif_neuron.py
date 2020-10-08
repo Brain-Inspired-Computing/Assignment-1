@@ -8,12 +8,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Leaky integrate and fire model
-class lif:
-    def __init__(self, capacitance=10, resistance=1, time_step=1, debug=False):
+class lif_neuron:
+    def __init__(self, capacitance=10000, resistance=1, time_step=1, debug=False):
         self.debug = debug
 
         # Properties
-        self.capacitance = capacitance # Capacitance in microFarads
+        self.capacitance = capacitance # Capacitance in miliVolts
         self.resistance = resistance # Resistance in kiloOhms
         self.time_step = time_step # Time between integrations in miliseconds
 
@@ -27,7 +27,6 @@ class lif:
     def sim(self, voltage, time):
         # Scaling variables
         n_steps = int(time/self.time_step)
-        v = voltage/1000
 
         # Extending the tracking arrays
         self.input.resize(len(self.input) + n_steps)
@@ -42,7 +41,7 @@ class lif:
             # Simulating the next time step
             new_output = 0 # Default to no new spike
             new_potential = self.potential[i-1]
-            new_potential += v/self.time_step
+            new_potential += voltage/self.time_step
             new_potential = new_potential - max(0, self.potential[i-1]/(self.resistance/self.time_step)) # Accounting for leak
             if (new_potential > self.capacitance):
                 new_potential = 0
@@ -59,13 +58,13 @@ class lif:
         ax = plt.axes()
         
         x = np.linspace(0, self.time_step, len(self.input))
-        ax.plot(x, self.input)
-        ax.plot(x, self.potential)
-        ax.plot(x, self.output)
+        ax.plot(x, self.input/max(self.input)/2, linestyle="--", label="Input Voltage")
+        ax.plot(x, self.potential/max(self.potential), label="Membrane Potential")
+        ax.plot(x, self.output/max(self.output), linewidth = 3, label="Spike Activity")
+        ax.legend()
+        ax.set(
+            xlabel='time (s)', ylabel='value',
+            title="LIF Neuron Simulation"
+        )
+        plt.show()
         return 0
-
-# Testing
-lif_neuron = lif(resistance = 0, debug=True)
-lif_neuron.sim(650,1000)
-#lif_neuron.sim(0,1000)
-lif_neuron.plot_activity()
