@@ -7,7 +7,6 @@ by Peter Tilton
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Leaky integrate and fire model
 class lif_neuron:
     def __init__(self, capacitance=10000, resistance=500, time_step=1, debug=False):
         self.debug = debug
