@@ -30,7 +30,7 @@ class Izhikevich:
             )
             self.u[i] = self.u[i - 1] + self.h * (
                 self.a * (self.b * self.v[i - 1] - self.u[i - 1])
-            )  # not sure if it is self.v[i] or self.v[i-1]
+            )
             if self.v[i] >= 30:
                 self.v[i] = self.c
                 self.u[i] += self.d
