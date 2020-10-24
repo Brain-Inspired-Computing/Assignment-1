@@ -11,12 +11,15 @@ class Izhikevich:
         self.c = c
         self.d = d
         self.h = 0.5  # step size
-        self.time = np.arange(0, 1000.01, self.h)  # total time 1s
-        self.v = np.zeros(len(self.time))
-        self.u = np.zeros(len(self.time))
 
     def model(self, I=5, start=300, end=800):  # time is in MS, I is the input in mV
+        if start > end:
+            print("Start time must be before end time")
+            return
         # Simulate
+        self.time = np.arange(0, max(1000, end) + 0.01, self.h)  # total time 1s
+        self.v = np.zeros(len(self.time))
+        self.u = np.zeros(len(self.time))
         self.v[0] = -65
         self.u[0] = self.b * self.v[0]
 
@@ -49,7 +52,8 @@ class Izhikevich:
         plt.show()
 
 
-Izhikevich(0.02, 0.2, -50, 2).model()
+Izhikevich().model()
 
-# Chattering: 0.02, 0.2, -50,2
+# Chattering:
+# Izhikevich(0.02, 0.2, -50,2).model()
 
