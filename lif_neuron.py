@@ -67,3 +67,29 @@ class lif_neuron:
         )
         plt.show()
         return 0
+
+    def plot_rate(self, max_voltage=300):
+        self.clear()
+
+        rates = np.zeros(max_voltage)
+        for i in range(max_voltage):
+            self.sim(i, max_voltage)
+            rates[i] = sum(self.output)
+            self.clear()
+
+        ax = plt.axes()
+        x = np.arange(0, max_voltage, 1)
+        ax.plot(x, rates, label="Spike Rate")
+        ax.legend()
+        ax.set(
+            xlabel='Voltage (mV)', ylabel='Spike Rate (hz)',
+            title="LIF Neuron Simulation: Rate as Function of Voltage"
+        )
+        plt.show()
+        return 0
+
+    def clear(self):
+        self.input = np.array([0])
+        self.potential = np.array([0])
+        self.output = np.array([0])
+        return 0
