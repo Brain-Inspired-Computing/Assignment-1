@@ -99,7 +99,7 @@ plt.subplot(3, 1, 3)
 plt.plot(t, StimulusCurrent(t), 'k')
 plt.xlabel('t (ms)')
 plt.ylabel('$Stim Current$')
-plt.ylim(-1, 31)
+
 
 plt.tight_layout()
 plt.show()
