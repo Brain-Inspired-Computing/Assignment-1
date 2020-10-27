@@ -106,7 +106,7 @@ plt.xlabel('t (ms)')
 plt.subplot(2, 1, 2)
 plt.plot(t, StimulusCurrent(t), 'k')
 plt.xlabel('t (ms)')
-plt.ylabel('$Stimulus Current$')
+plt.ylabel('Stimulus Current')
 
 plt.tight_layout()
 plt.show()
