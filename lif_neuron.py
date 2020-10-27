@@ -65,8 +65,7 @@ class lif_neuron:
             xlabel='time (s)', ylabel='value',
             title="LIF Neuron Simulation"
         )
-        plt.show()
-        return 0
+        return ax
 
     def plot_rate(self, max_current=300):
         self.clear()
@@ -82,11 +81,10 @@ class lif_neuron:
         ax.plot(x, rates, label="Spike Rate")
         ax.legend()
         ax.set(
-            xlabel='Current (mA)', ylabel='Spike Rate (hz)',
-            title="LIF Neuron Simulation: Rate as Function of Voltage"
+            xlabel='Current (uA)', ylabel='Spike Rate (hz)',
+            title="LIF Neuron Simulation: Rate as Function of Current"
         )
-        plt.show()
-        return 0
+        return ax
 
     def clear(self):
         self.input = np.array([0])
