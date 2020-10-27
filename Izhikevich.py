@@ -6,6 +6,13 @@ import matplotlib.pyplot as plt
 
 class Izhikevich:
     def __init__(self, a=0.02, b=0.2, c=-65, d=2):
+        """
+        Initialize the Izhikevich model
+
+        by changing a,b,c,d you can get different spiking behavior
+
+        reference the paper of this model: https://courses.cs.washington.edu/courses/cse528/07sp/izhi1.pdf for a,b,c,d parameters
+        """
         self.a = a
         self.b = b
         self.c = c
@@ -13,6 +20,13 @@ class Izhikevich:
         self.h = 0.5  # step size
 
     def model(self, I=5, start=300, end=800):  # time is in MS, I is the input in mV
+        """
+        Run the model
+
+        I : input current magnitude
+        start : start time of current
+        end : end time of current
+        """
         if start > end:
             print("Start time must be before end time")
             return
