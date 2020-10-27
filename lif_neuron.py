@@ -22,8 +22,8 @@ class lif_neuron:
         self.potential = np.array([0])
         self.output = np.array([0])
 
-    # Function simulates the neuron for a given time in miliseconds and input voltage in milivolts
-    def sim(self, voltage, time):
+    # Function simulates the neuron for a given time in miliseconds and input current in miliamps
+    def sim(self, current, time):
         # Scaling variables
         n_steps = int(time/self.time_step)
 
@@ -34,13 +34,13 @@ class lif_neuron:
 
         # Adding to activity tracking arrays
         for i in range(len(self.output)-n_steps, len(self.output)):
-            self.input[i] = voltage # Adding input voltage to neuron sim
-            if(self.debug): print("Input is " + str(self.input[i]) + " mV at " + str(i) + " ms.")
+            self.input[i] = current # Adding current voltage to neuron sim
+            if(self.debug): print("Input is " + str(self.input[i]) + " mA at " + str(i) + " ms.")
 
             # Simulating the next time step
             new_output = 0 # Default to no new spike
             new_potential = self.potential[i-1]
-            new_potential += voltage/self.time_step
+            new_potential += current/self.time_step
             new_potential = new_potential - max(0, self.potential[i-1]/(self.resistance/self.time_step)) # Accounting for leak
             if (new_potential > self.capacitance):
                 new_potential = 0
@@ -57,7 +57,7 @@ class lif_neuron:
         ax = plt.axes()
         
         x = np.linspace(0, self.time_step, len(self.input))
-        ax.plot(x, self.input/max(self.input)/2, linestyle="--", label="Input Voltage")
+        ax.plot(x, self.input/max(self.input)/2, linestyle="--", label="Input Current")
         ax.plot(x, self.potential/max(self.potential), label="Membrane Potential")
         ax.plot(x, self.output/max(self.output), linewidth = 3, label="Spike Activity")
         ax.legend()
@@ -68,21 +68,21 @@ class lif_neuron:
         plt.show()
         return 0
 
-    def plot_rate(self, max_voltage=300):
+    def plot_rate(self, max_current=300):
         self.clear()
 
-        rates = np.zeros(max_voltage)
-        for i in range(max_voltage):
-            self.sim(i, max_voltage)
+        rates = np.zeros(max_current)
+        for i in range(max_current):
+            self.sim(i, max_current)
             rates[i] = sum(self.output)
             self.clear()
 
         ax = plt.axes()
-        x = np.arange(0, max_voltage, 1)
+        x = np.arange(0, max_current, 1)
         ax.plot(x, rates, label="Spike Rate")
         ax.legend()
         ax.set(
-            xlabel='Voltage (mV)', ylabel='Spike Rate (hz)',
+            xlabel='Current (mA)', ylabel='Spike Rate (hz)',
             title="LIF Neuron Simulation: Rate as Function of Voltage"
         )
         plt.show()
