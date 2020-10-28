@@ -72,7 +72,7 @@ class lif_neuron:
 
         rates = np.zeros(max_current)
         for i in range(max_current):
-            self.sim(i, max_current)
+            self.sim(i, 1000)
             rates[i] = sum(self.output)
             self.clear()
 
