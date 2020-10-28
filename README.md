@@ -12,7 +12,7 @@
 
   python Izhikevich.py  
   
-  - to change a,b,c, or d values use the Izhikevich constructor the default values are for the regular spiking behavior
+  - to change a,b,c, or d values use the Izhikevich constructor the default values are specified for the regular spiking behavior
   - the model function takes in I, start, end as optional parameters that represents the magnitude of the input current, the start of the current, and the end of the current respectively. The default values for this method are I = 5, start = 300, and end = 800.
   
 ## Run Hodgkin-Huxley: 
