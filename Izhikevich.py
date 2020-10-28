@@ -32,23 +32,23 @@ class Izhikevich:
             return
         # Simulate
         self.time = np.arange(0, max(1000, end) + 0.01, self.h)  # total time 1s
-        self.v = np.zeros(len(self.time))
-        self.u = np.zeros(len(self.time))
-        self.v[0] = -65
-        self.u[0] = self.b * self.v[0]
+        self.v = np.zeros(len(self.time))  # array to hold v
+        self.u = np.zeros(len(self.time))  # array to hold u
+        self.v[0] = -65  # set the initial value of v
+        self.u[0] = self.b * self.v[0]  # set the initial value of u
 
-        for i in range(1, len(self.time)):
+        for i in range(1, len(self.time)):  # simuluate time
             self.v[i] = self.v[i - 1] + self.h * (
                 0.04 * self.v[i - 1] ** 2
                 + 5 * self.v[i - 1]
                 + 140
                 - self.u[i - 1]
                 + (I if start <= i * self.h <= end else 0)
-            )
+            )  # solving for v_i
             self.u[i] = self.u[i - 1] + self.h * (
                 self.a * (self.b * self.v[i - 1] - self.u[i - 1])
-            )
-            if self.v[i] >= 30:
+            )  # solving for u_i
+            if self.v[i] >= 30:  # checking if there is a spike
                 self.v[i] = self.c
                 self.u[i] += self.d
 
