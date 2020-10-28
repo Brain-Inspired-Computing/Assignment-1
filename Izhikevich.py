@@ -60,7 +60,7 @@ class Izhikevich:
         plt.xlabel("Time (ms)")
         plt.ylabel("Membrane Potential (mV)")
         plt.title(
-            f"Izhikevich Single Neuron a: {self.a} b: {self.b} c: {self.c} d: {self.d}"
+            f"Izhikevich Single Neuron a: {self.a} b: {self.b} c: {self.c} d: {self.d} Input Current: {I} mV"
         )
         plt.figtext(0, 0, "Red dots are the start and end of current.")
         plt.show()
